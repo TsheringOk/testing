@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+<body>
+    <script>
+        var src = prompt("Enter the URL of the iframe:");
+        if (src) {
+            var iframe = document.createElement("iframe");
+            iframe.src = src;
+            iframe.width = "600";
+            iframe.height = "400";
+            document.body.appendChild(iframe);
+
+            iframe.onload = function () {
+                const message = {
+                    s: "eval(1+1)",
+                    f: "..",
+                    a: []
+                };
+                iframe.contentWindow.postMessage(message, "*");
+            };
+        } else {
+            alert("No URL provided for the iframe.");
+        }
+    </script>
+</body>
+</html>
