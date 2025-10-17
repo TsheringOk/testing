@@ -15,7 +15,7 @@
       // Send a message telling the victim page to run alert(document.cookie)
       // if victim has such function
       this.contentWindow.postMessage(
-        { func: "alert", params: document.cookie },
+        { func: "console.log", params: document.cookie },
         "*"
       );
     };
