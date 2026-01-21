@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hacker Site</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: black;
+      color: #00ff00;
+      text-align: center;
+    }
+
+    .warning {
+      font-size: 64px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: red;
+      text-shadow: 0 0 10px red;
+    }
+
+    .cookie {
+      font-size: 28px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="warning">THIS IS A HACKER SITE</div>
+  <div class="cookie" id="output">Loading...</div>
+
+  <script>
+    // Get everything after '?'
+    const query = window.location.search.substring(1);
+
+    document.getElementById("output").textContent =
+      query
+        ? `Your cookie is ${query}`
+        : "No query found";
+  </script>
+
+</body>
+</html>
