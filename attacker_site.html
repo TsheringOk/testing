@@ -10,10 +10,12 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       background: black;
       color: #00ff00;
       text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .warning {
@@ -25,7 +27,14 @@
     }
 
     .cookie {
-      font-size: 28px;
+      font-size: 24px;
+      max-width: 90vw;
+
+      /* 🔑 THE IMPORTANT PART */
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: break-all;
+      white-space: normal;
     }
   </style>
 </head>
@@ -35,7 +44,6 @@
   <div class="cookie" id="output">Loading...</div>
 
   <script>
-    // Get everything after '?'
     const query = window.location.search.substring(1);
 
     document.getElementById("output").textContent =
