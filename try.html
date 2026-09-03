@@ -49,6 +49,10 @@
 			});
 
 			window.addEventListener("message", (event) => {
+				if (event.origin !== "https://gi.nutako.com") {
+					return;
+				}
+
 				console.log("Incoming postMessage:", {
 					origin: event.origin,
 					data: event.data,
