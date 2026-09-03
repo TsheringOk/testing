@@ -11,7 +11,7 @@
 
 		<script>
 			const output = document.getElementById("output");
-			const messageDelay = 5000;
+			const messageDelay = 3500;
 			let gameWindow = null;
 			let receivedMessages = 0;
 
@@ -49,10 +49,6 @@
 			});
 
 			window.addEventListener("message", (event) => {
-				if (event.origin !== "https://gi.nutako.com") {
-					return;
-				}
-
 				console.log("Incoming postMessage:", {
 					origin: event.origin,
 					data: event.data,
